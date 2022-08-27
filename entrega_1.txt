@@ -1,0 +1,7 @@
+- Impresión del problema. Les parece fácil, difícil, largo, corto, cambios en relación a la entrega anterior, lo asocian a otro problema, comentarios, etc.
+
+- Ideas de como lo van a intentar resolver
+
+- Comentarios sobre los cambios que hagan en el código a medida que intentan mejorar el resultado. Comentar y explicar los diferentes intentos que van haciendo, incluir pros y contras esperados/encontrados.
+
+- Comentarios finales de la entrega.
