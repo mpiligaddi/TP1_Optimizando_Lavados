@@ -9,8 +9,13 @@ class Garment {
 	std::vector<int> incompatibleGarments; //Vector para saber cuales son las prendas incompatibles de cada lavado, las mismas se identifican con el numero de id.
 	int washingShift; //Turno de lavado de cada prenda
 	public:
+	Garment(int numberId);
+	void setWashingTime(int washingTime);
+	void setWashingShift(int washingShift);
+	void setIncompatibleGarment(int idGarment);
+	int getIdNumber();
+	std::vector<int> getIncompatibleGarments();
 	~Garment();
 };
 
 #endif /*__GARMENT_H__*/
-
