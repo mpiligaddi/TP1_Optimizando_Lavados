@@ -74,8 +74,14 @@ int main(int argc, char const *argv[]) {
 		reading_result = get_line(file,line);
 	}
 
+	/*for(int i = 0; i < laundry.getNumberOfGarments() ; i++) {
+		laundry.verIncompatibleDeXPrenda(i);
+	}
+	printf("el numero de incompatibilidades es %i\n",laundry.prueba);*/
+
+
 	laundry.makeGarmentGroups();
 	laundry.showGarmentGroups();
-	
+
 	return 0;
 }

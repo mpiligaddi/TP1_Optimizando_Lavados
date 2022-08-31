@@ -14,7 +14,9 @@ class Garment {
 	void setWashingShift(int washingShift);
 	void setIncompatibleGarment(int idGarment);
 	int getIdNumber();
+	int getWashingShift();
 	std::vector<int> getIncompatibleGarments();
+	void showIncompatibleGarment();
 	~Garment();
 };
 
