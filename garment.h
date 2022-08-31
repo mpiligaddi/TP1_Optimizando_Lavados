@@ -10,11 +10,13 @@ class Garment {
 	int washingShift; //Turno de lavado de cada prenda
 	public:
 	Garment(int numberId);
+	Garment();
 	void setWashingTime(int washingTime);
 	void setWashingShift(int washingShift);
 	void setIncompatibleGarment(int idGarment);
 	int getIdNumber();
 	int getWashingShift();
+	int getWashingTime();
 	std::vector<int> getIncompatibleGarments();
 	void showIncompatibleGarment();
 	~Garment();

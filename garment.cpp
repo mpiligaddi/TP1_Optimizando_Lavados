@@ -10,12 +10,20 @@ Garment::Garment(int numberId): id(numberId), washingTime(0), washingShift(0) {
 
 }
 
+Garment::Garment() {
+
+}
+
 int Garment::getIdNumber() {
 	return id;
 }
 
 int Garment::getWashingShift() {
 	return washingShift;
+}
+
+int Garment::getWashingTime() {
+	return washingTime;
 }
 
 void Garment::setWashingTime(int washingTime) {

@@ -23,6 +23,7 @@ class Laundry {
 	void makeGarmentGroups();
 	void showGarmentGroups();
 	void verIncompatibleDeXPrenda(int id);
+	void getWashingTotalTime();
 	~Laundry();
 };
 

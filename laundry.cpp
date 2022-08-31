@@ -3,6 +3,8 @@
 #include <cstdint>
 #include <string.h>
 #include <stdlib.h>
+#include <fstream>  
+
 
 #include "laundry.h"
 
@@ -61,6 +63,11 @@ void Laundry::setWashingTime(int firstIdGarment, int washingTime){
     else {
     	firstGarment->second.setWashingTime(washingTime);
     }
+    /*printf("inciio\n");
+    for(int i = 0; i < garments.size(); i++) {
+    	printf("%i\n",garments.at(i).getWashingTime());
+    }
+    printf("finnn\n");*/
 }
 
 //Despues, me fijo que prenda de cada grupo es la que tarda mas.
@@ -165,7 +172,7 @@ void Laundry::makeGarmentGroups() {
 			// se crea un grupo directamente y se lo agrega ahi.
 			//printf("Como el mapa de grupos de prendas esta vacio, creo un grupo y agrego la prenda ahi.\n");
 			std::vector<Garment> garments;
-			garment.setWashingTime(washingShift);
+			//garment.setWashingTime(washingShift);
 			garments.push_back(garment);
 			groupOfGarments.insert({washingShift,garments});
 			/*for(int l = 0 ; l < groupOfGarments.size(); l++) {
@@ -239,6 +246,29 @@ void Laundry::makeGarmentGroups() {
 	}*/
 }
 
+void Laundry::getWashingTotalTime() {
+	int washingTotalTime = 0;
+	Garment garmentDefinitory;
+	for(int i = 0; i < groupOfGarments.size(); i++) {
+		auto group = groupOfGarments.find(i);
+		for(int j = 0; j < group->second.size() - 1; j++) {
+			Garment garment = group->second.at(j);
+			Garment garmentAux = group->second.at(j + 1);
+			if(garment.getWashingTime() >= garmentAux.getWashingTime()) {
+				garmentDefinitory = garment;
+			}
+			else {
+				garmentDefinitory = garmentAux;
+			}
+		}
+		printf("Washing time del grupo %i es %i\n",i,garmentDefinitory.getWashingTime() );
+		washingTotalTime = washingTotalTime + garmentDefinitory.getWashingTime();
+	}
+	printf("El tiempo total de lavado es de %i\n",washingTotalTime);
+}
+
+
+
 //A PARTIR DEL 10 CUADNO SE EMPIEZAN A COPIAR ESTA MAL!
 
 
@@ -275,11 +305,14 @@ Para cuando tenga que optimizar por tiempo de lavado teniendo en cuenta la separ
 //el según el número de lavado asignado. ej: "1 5" Esto sería lavar la prenda "1" en el lavado "5"
 
 void Laundry::showGarmentGroups() {
+	std::ofstream outfile ("primer_solucion.txt");
+	int washingTotalTime = 0;
 	for(int i = 0; i < garments.size(); i++) {
 		int id = garments.at(idGarments.at(i)).getIdNumber();
 		int washingShift = garments.at(idGarments.at(i)).getWashingShift();
-		std::cout << id << " " << washingShift << std::endl;
+		outfile << id << " " << washingShift << std::endl;
 	}
+	outfile.close();
 }
 
 Laundry::~Laundry() {

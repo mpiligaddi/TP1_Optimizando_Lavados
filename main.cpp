@@ -13,7 +13,7 @@
 #define COMMENT 'c'
 #define PROBLEM 'p'
 #define INCOMPATIBLE 'e'
-#define TIME 'd'
+#define TIME 'n'
 
 int get_line(std::ifstream& file, std::string& line) {
 	if (!file.is_open()) {
@@ -82,6 +82,7 @@ int main(int argc, char const *argv[]) {
 
 	laundry.makeGarmentGroups();
 	laundry.showGarmentGroups();
+	laundry.getWashingTotalTime();
 
 	return 0;
 }
