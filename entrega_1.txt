@@ -1,10 +1,54 @@
+TP1 - Optimizando Lavados
+
+Modelos y Optimización I - FIUBA - 2do Cuatrimestre 2022. 
+
+Padrón: 105682.
+
+Apellido y Nombre: Gaddi, María Pilar.
+
+----------------------------------------------------------
+
+- Introducción
+
+El presente trabajo reune la documentación de la solución del primer trabajo práctico de la materia Modelos y Optimización I que consiste en desarrollar la solución más óptima de lavado en una lavandería que tiene N cantidad de prendas junto con M incompatibilidades entre las mismas. El trabajo se desarolló en C++ utilizando los conocimientos previos e investigación propia.
+
 - Impresión del problema. Les parece fácil, difícil, largo, corto, cambios en relación a la entrega anterior, lo asocian a otro problema, comentarios, etc.
 
+Cuando lo leí por primera vez el problema me pareció dificil en cuanto a como poder cumplir y tener en cuenta todas las restricciones que el mismo tiene y al mismo tiempo poder dar una solución óptima, sin saber a priori, cual es la mejor.
+Luego, a medida que fuí haciendo esquemas y pseucódigo, comencé a separar por partes el problema para que no me resulte tan largo. Primero fijarme que se cumpla el hecho de que las prendas incompatibles no vayan juntas y luego, una vez que tenia esa restricción implementada, pase a calcular el tiempo de lavado de cada grupo de prendas. 
+
 - Ideas de como lo van a intentar resolver
+Como es posible que sea un problema de la vida cotidiana, lo primero que hice fue hacerme un esquema de las distintas prendas que hay disponibles en la lavandería y agruparlas en grupos, teniendo en cuenta que las prendas que son incompatibles no se pueden agrupar. También le asigne a cada prenda el tiempo de lavado de cada una para así tenerlo en cuenta una vez formados los grupos de lavado. 
+Una vez que los grupos de lavado estén formados, se deberá comparar, en cada grupo, los tiempos de lavado de cada prenda, y asi poder evaluar el tiempo de lavado de cada uno de los grupos (que sería el tiempo que lleve lavar la prenda más sucia de ese lavado, es decir, la que tiene el mayor tiempo de lavado).
 
 - Comentarios sobre los cambios que hagan en el código a medida que intentan mejorar el resultado. Comentar y explicar los diferentes intentos que van haciendo, incluir pros y contras esperados/encontrados.
+En un primer intento, lo que hice fue asignarle a cada prenda un número de grupo, y en base a eso iba formando los grupos. Sin embargo, esto no me resultó muy escalable ya que iba a tener que estar constantemente recorriendo un vector de prendas e ir comparando con cada una su numero de grupo, ver si son compatibles y que tiempo de lavado es el mayor. 
+Luego, lo que hice fue implementar un mapa de grupos de prendas, en donde su clave es el numero de grupo asignado. De esta forma, los elementos del vector que esten en la clave 0, serán las prendas pertenecientes al grupo 0 y así sucesivamente. Una vez que se lee el archivo primer_problema.txt y se guardan todos los datos requeridos en variables, ya se puede pasar a formar los grupos con las prendas que se encuentran también en un mapa, donde la clave es el id de cada prenda. 
+De esta forma, comparado prendas compatibles e incompatibles, se forman los grupos y se llena el primer mapa descripto. Luego, se pasa a buscar grupo por grupo su mayor tiempo de lavado y de esta forma se puede obtener el tiempo que costó lavar todas las prendas en la lavandería.
 
 - Comentarios finales de la entrega.
+En esta primer entrega considero que todos los requisitos para cumplir con las restricciones fueron tenidos en cuenta. Como restricción únicamente se tuvo el hecho de que era necesario agrupar prendas que no sean incompatibles entre ellas. No hay un límite de grupos por armar ni un límite en cuanto a cuantas prendas pueden ingresar en un mismo grupo.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 CantidadPrendasTotales

@@ -3,6 +3,7 @@
 
 #include <map>
 #include <list>
+
 #include "garment.h"
 
 class Laundry {
@@ -13,19 +14,13 @@ class Laundry {
 	std::vector<int> idGarments;
 	void setIncompatiblePair(int firstId, int secondId);
 	public:
-	int prueba;
 	void setNumberOfGarments(int numberOfGarments);
 	void setNumberOfIncompatibleGarments(int numberOfIncompatibleGarments);
-	int getNumberOfGarments();
-	int getNumberOfIncompatibleGarments();
 	void setIncompatibleGarments(int firstIdGarment, int secondIdGarment);
 	void setWashingTime(int firstIdGarment, int washingTime);
 	void makeGarmentGroups();
 	void showGarmentGroups();
-	void verIncompatibleDeXPrenda(int id);
-	void getWashingTotalTime();
 	~Laundry();
 };
 
 #endif /*__LAUNDRY_H__*/
-

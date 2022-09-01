@@ -7,33 +7,51 @@
 #include "garment.h"
 
 Garment::Garment(int numberId): id(numberId), washingTime(0), washingShift(0) {
-
 }
 
 Garment::Garment() {
-
 }
+
+/*
+Pre: -
+Pos: Se devuelve el id de la prenda correspondiente
+*/
 
 int Garment::getIdNumber() {
 	return id;
 }
 
+/*
+Pre: -
+Pos: Se devuelve el grupo de lavado de la prenda correspondiente
+*/
+
 int Garment::getWashingShift() {
 	return washingShift;
 }
 
-int Garment::getWashingTime() {
-	return washingTime;
-}
+/*
+Pre: -
+Pos: Se setea el tiempo de lavado de la prenda correspondiente
+*/
 
 void Garment::setWashingTime(int washingTime) {
 	this->washingTime = washingTime;
 }
 
+/*
+Pre: -
+Pos: Se setea el grupo de lavado de la prenda correspondiente
+*/
+
 void Garment::setWashingShift(int washingShift) {
-	//printf("washing shift %i\n", washingShift );
 	this->washingShift = washingShift;
 }
+
+/*
+Pre: -
+Pos: Se setea una prenda incompatible a la prenda correspondiente
+*/
 
 void Garment::setIncompatibleGarment(int idGarment) {
 	for(int i = 0; i < incompatibleGarments.size(); i++) {
@@ -42,14 +60,10 @@ void Garment::setIncompatibleGarment(int idGarment) {
 	incompatibleGarments.push_back(idGarment);
 }
 
-void Garment::showIncompatibleGarment() {
-	printf("incompatibles de %i:\n", id);
-	for(int i = 0; i < incompatibleGarments.size(); i++) {
-		printf("%i\n", incompatibleGarments.at(i));
-	}
-	printf("numero de incompatibles: %li\n",incompatibleGarments.size() );
-	printf("--------------------------------------\n");
-}
+/*
+Pre: -
+Pos: Se devuelve las prendas incompatibles de la prenda correspondiente
+*/
 
 std::vector<int> Garment::getIncompatibleGarments() {
 	return incompatibleGarments;

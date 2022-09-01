@@ -15,6 +15,11 @@
 #define INCOMPATIBLE 'e'
 #define TIME 'n'
 
+/*
+Pre: Se debe tener un archivo a abrir
+Pos: Se obtiene una linea de archivo si se pudo abrir bien y si la linea se leyó correctamente
+*/
+
 int get_line(std::ifstream& file, std::string& line) {
 	if (!file.is_open()) {
 		std::cout << "Error al abrir el archivo.\n";
@@ -29,7 +34,6 @@ int get_line(std::ifstream& file, std::string& line) {
 	}
 	return 0;
 }
-
 
 int main(int argc, char const *argv[]) {
 	if(argc != PARAM_NUM) {
@@ -54,18 +58,16 @@ int main(int argc, char const *argv[]) {
 		if (file.eof()) break;
 		std::istringstream stream(line);
 		stream >> operationKey;
-		//definición del problema formato: p c n m "c" es un comentario, "n" es la cantidad de prendas y "m" la cantidad de incompatibilidades ej: "p edges 10 30"
+		
 		if(operationKey == PROBLEM) {
 			stream >> comment >> numberOfGarments >> numberOfIncompatibleGarments;
 			laundry.setNumberOfGarments(numberOfGarments);
 			laundry.setNumberOfIncompatibleGarments(numberOfIncompatibleGarments);
 		}
-		//"e": incompatibilidad formato: e n1 n2 "n1" y "n2" son los números de prenda incompatibles entre ellas ej: "e 1 2"
 		else if(operationKey == INCOMPATIBLE) {
 			stream >> firstIdGarment >> secondIdGarment;
 			laundry.setIncompatibleGarments(firstIdGarment, secondIdGarment);
 		}
-		//"n": tiempo de lavado formato: n n1 c1 "n1" es el número de prenda y "c1" el tiempo de lavado ej: "n 5 3"
 		else if(operationKey == TIME) {
 			stream >> firstIdGarment >> washingTime;
 			laundry.setWashingTime(firstIdGarment, washingTime);
@@ -74,15 +76,8 @@ int main(int argc, char const *argv[]) {
 		reading_result = get_line(file,line);
 	}
 
-	/*for(int i = 0; i < laundry.getNumberOfGarments() ; i++) {
-		laundry.verIncompatibleDeXPrenda(i);
-	}
-	printf("el numero de incompatibilidades es %i\n",laundry.prueba);*/
-
-
 	laundry.makeGarmentGroups();
 	laundry.showGarmentGroups();
-	laundry.getWashingTotalTime();
 
 	return 0;
 }
