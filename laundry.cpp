@@ -4,6 +4,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <fstream>
+#include <bits/stdc++.h>
 
 #include "laundry.h"
 
@@ -90,6 +91,7 @@ Pos: Se generan grupos de lavado para cada prenda, separando las incompatibles.
 */
 
 void Laundry::makeGarmentGroups() {
+	sort(idGarments.begin(), idGarments.end());
 	int washingShift = 0;
 	bool incompatible = false;
 	bool garmentAdded = false;
@@ -141,7 +143,8 @@ Pos: Se muestra por pantalla el id de la prenda junto con su grupo asignado.
 void Laundry::showGarmentGroups() {
 	std::ofstream outfile ("segunda_solucion.txt");
 	int washingTotalTime = 0;
-	int size = idGarments.size();
+	//sort(idGarments.begin(), idGarments.end());
+	int size = garments.size();
 	//printf("el size de garments es %i\n", );
 	//printf("el size de id garments es %i\n",size );
 	for(int i = 0; i < size; i++) {
