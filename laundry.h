@@ -20,6 +20,7 @@ class Laundry {
 	void setWashingTime(int firstIdGarment, int washingTime);
 	void makeGarmentGroups();
 	void showGarmentGroups();
+	void getWashingTotalTime();
 	~Laundry();
 };
 

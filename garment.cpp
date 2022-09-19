@@ -30,6 +30,10 @@ int Garment::getWashingShift() {
 	return washingShift;
 }
 
+int Garment::getWashingTime() {
+	return washingTime;
+}
+
 /*
 Pre: -
 Pos: Se setea el tiempo de lavado de la prenda correspondiente

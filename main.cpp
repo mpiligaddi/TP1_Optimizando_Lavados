@@ -78,6 +78,7 @@ int main(int argc, char const *argv[]) {
 
 	laundry.makeGarmentGroups();
 	laundry.showGarmentGroups();
+	laundry.getWashingTotalTime();
 
 	return 0;
 }
