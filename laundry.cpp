@@ -63,7 +63,6 @@ std::vector<std::pair<int, Garment>> Laundry::sorting(std::map<int, Garment>& M)
     for (auto& it : M) {
         A.push_back(it);
     }
-
     sort(A.begin(), A.end(), cmp);
 
     return A;
@@ -116,13 +115,9 @@ Pos: Se generan grupos de lavado para cada prenda, separando las incompatibles.
 
 void Laundry::makeGarmentGroups() {
 	int washingShift = 0;
-	bool incompatible = false;
 	bool garmentAdded = false;
-	int k = 1;
 	for(int i = 0; i < idGarments.size(); i++) {
-		garmentAdded = false;
-		Garment garment;
-			garment = garments.at(idGarments.at(i));
+		Garment garment = garments.at(idGarments.at(i));
 		if(groupOfGarments.empty()) {
 			std::vector<Garment> garments;
 			garments.push_back(garment);
@@ -130,36 +125,48 @@ void Laundry::makeGarmentGroups() {
 			washingShift++;
 		}
 		else {
-			for(int j = 0; j < groupOfGarments.size(); j++) {
-				if(garmentAdded == true) continue;
-				auto vectorOfGarments = groupOfGarments.find(j);
-				incompatible = false;
-				int size = vectorOfGarments->second.size();
-				for(int p = 0; p < size; p++) {
-					if(incompatible == true) continue;
-					Garment garmentAux = vectorOfGarments->second.at(p);
-					for(int k = 0; k < garment.getIncompatibleGarments().size(); k++) {
-						if(garment.getIncompatibleGarments().at(k) == garmentAux.getIdNumber()) incompatible = true;
-					}
-					if((incompatible == false) && (p == size - 1)) {
-						garments.at(garment.getIdNumber()).setWashingShift(j);
-						vectorOfGarments->second.push_back(garment);
-						groupOfGarments.at(j) = vectorOfGarments->second;
-						garmentAdded = true;
-					}
-				}
-			}
+			garmentAdded = iterateByGroups(garment);
 			if(garmentAdded == false) {
 				std::vector<Garment> vectorOfGarments;
 				garments.at(garment.getIdNumber()).setWashingShift(washingShift);
 				vectorOfGarments.push_back(garments.at(garment.getIdNumber()));
 				groupOfGarments.insert({washingShift,vectorOfGarments});
 				washingShift++;
-			}			
+			}		
 		}
 	}
 }
 
+/*
+Pre: -
+Pos: Se recorren los grupos de prendas y en caso de que una prenda sea compatible con todas las prendas
+de un grupo, se agrega a ese grupo y devuelve true en caso de ser agregada y false si no.
+*/
+
+int Laundry::iterateByGroups(Garment garment) {
+	bool incompatible = false;
+	bool garmentAdded = false;
+	for(int j = 0; j < groupOfGarments.size(); j++) {
+		if(garmentAdded == true) continue;
+		auto vectorOfGarments = groupOfGarments.find(j);
+		incompatible = false;
+		int size = vectorOfGarments->second.size();
+		for(int p = 0; p < size; p++) {
+			if(incompatible == true) continue;
+			Garment garmentAux = vectorOfGarments->second.at(p);
+			for(int k = 0; k < garment.getIncompatibleGarments().size(); k++) {
+				if(garment.getIncompatibleGarments().at(k) == garmentAux.getIdNumber()) incompatible = true;
+			}
+			if((incompatible == false) && (p == size - 1)) {
+				garments.at(garment.getIdNumber()).setWashingShift(j);
+				vectorOfGarments->second.push_back(garment);
+				groupOfGarments.at(j) = vectorOfGarments->second;
+				garmentAdded = true;
+			}
+		}
+	}
+	return garmentAdded;	
+}
 /*
 Pre: -
 Pos: Se muestra por un txt el id de la prenda junto con su grupo asignado.

@@ -20,8 +20,9 @@ class Laundry {
 	void setWashingTime(int firstIdGarment, int washingTime);
 	void makeGarmentGroups();
 	void showGarmentGroups();
-	std::vector<std::pair<int, Garment> > sorting(std::map<int, Garment>& M);
+	std::vector<std::pair<int, Garment>> sorting(std::map<int, Garment>& M);
 	void sortIdGarments();
+	int iterateByGroups(Garment garment);
 	~Laundry();
 };
 
