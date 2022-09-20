@@ -12,24 +12,15 @@ Apellido y Nombre: Gaddi, María Pilar.
 
 El presente trabajo reune la documentación de la solución dos del primer trabajo práctico de la materia Modelos y Optimización I que consiste en desarrollar la solución más óptima de lavado en una lavandería que tiene N cantidad de prendas junto con M incompatibilidades entre las mismas. El trabajo se desarolló en C++ utilizando los conocimientos previos e investigación propia.
 
+- Explicación
 
-- Impresión del problema. Les parece fácil, difícil, largo, corto, cambios en relación a la entrega anterior, lo asocian a otro problema, comentarios, etc.
+En principio, lo primero que se hizo fue correr el programa junto con el archivo txt de la entrega dos para verificar cual era la diferencia con la entrega uno. Fue una diferencia bastante marcada debido a la gran cantidad de prendas y incompatibilidades extras que habia en la segunda entrega.
 
-- Ideas de como lo van a intentar resolver
+Por lo tanto, se comenzó a pensar en una solución para mejorar el tiempo de lavado total. 
 
-- Comentarios sobre los cambios que hagan en el código a medida que intentan mejorar el resultado. Comentar y explicar los diferentes intentos que van haciendo, incluir pros y contras esperados/encontrados
+Llegando a una conclusión, lo que se propone es lo siguiente:
 
-- Comentarios finales de la entrega
+En la primera entrega, las prendas caen de forma "aleatoria" en cada uno de los grupos, sin tener en cuenta el tiempo de lavado de cada prenda específica. En cambio, lo que se implementó en esta segunda entrega fue tener en cuenta el tiempo de lavado de cada prenda. De esta forma, primero se arman grupos con las prendas que mayor tiempo de lavado tienen para poder ir englobando la mayor cantidad de prendas posibles en un solo grupo de lavado, teniendo en cuenta que no hay un límite de prendas a tener en un sólo lavado. 
+De esta forma se va a tener los ids de las prendas con mayor tiempo de lavado primero, se van a analizar antes y se van a agrupar primeras en los grupos (chequeando incompatibilidades). Por consiguiente, los grupos que queden con menos elementos serán los de menor tiempo de lavado ya que son los que van a cubrir menor cantidad de prendas a la hora de comparar tiempos de lavado de los grupos, debido a que se utiliza el mayor tiempo de lavado de una prenda existente en un determinado grupo para el tiempo de lavado total de ese mismo. 
 
-
-Alguna solucion para mejorar el tiempo de lavado total?
-Me podria fijar en lo que no tuve en cuenta en la primera entrega, 
-
-Una vez que caen de forma random, se pueden reordenar supongo. Fijandome cual es el que tarda mas si es compatible con alguno de los grupos totales y si es el mayor, para agregarlo ahi e ir englobando la mayor cantidad de prendas posibles en un solo grupo de lavado. Porque no hay limite de cuantas prendas se pueden poner en un lavado. Eso es bueno. 
-
-Ordenar de mayor a menor tiempo de lavado? el id_garment.
-De esta forma voy a tener los ids con mayor tiempo de lavado primero y los voy a analizar antes y asi se van a poder agrupar mejor juntos. 
-
-Ya que se van a terminar agrupando los de mayor tiempo de llvado juntos y cada vez que haya mayor cantidad de elementos en los grupos, va a ver mas probabilidad de incompatibilidades entre prendas. De esta forma generamos que los grupos que queden con menos elementos sean los de menor tiempo de lavado que son los que van a "salvar" menor cantidad de prendas a la hora de comparar tiempos de lavado de los grupos. 
-
-Si primero formo grupos con los que tienen mayor tiempo de lavado, primero que nada voy a poder cubrir mayor cantidad de lavados de prendas que tienen el mayor tiempo de lavado, ya que voy a comenzar formando grupos con esas prendas. A medida que va bajando de tiempo de lavado voy a ir formando otros grupos pero con menor tiempo de lavado (y hasta algunas prendas se sumaran a los grupos ya creados antriormente ya que son compatibles con las prendas del grupo en cuestion). De esta forma se va a reducir el tiempo por grupos de cada lavado y como consiguiente el tiempo de lavado total.
+A medida que va bajando de tiempo de lavado se va a ir formando otros grupos pero con menor tiempo de lavado (y hasta algunas prendas se sumaran a grupos ya creados anteriormente en caso de que sean compatibles con las prendas del mismo). De esta forma se va a reducir el tiempo por grupos de cada lavado y como consiguiente el tiempo de lavado total.
