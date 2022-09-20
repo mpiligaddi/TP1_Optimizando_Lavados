@@ -12,6 +12,7 @@ class Laundry {
 	std::map<int, Garment> garments;
 	std::map<int, std::vector<Garment>> groupOfGarments;
 	std::vector<int> idGarments;
+	//std::vector<int> washingTimeGarments;
 	void setIncompatiblePair(int firstId, int secondId);
 	public:
 	void setNumberOfGarments(int numberOfGarments);
@@ -21,6 +22,9 @@ class Laundry {
 	void makeGarmentGroups();
 	void showGarmentGroups();
 	void getWashingTotalTime();
+	std::vector<std::pair<int, Garment> > sorting(std::map<int, Garment>& M);
+	//void sorting(std::vector<int, Garment>& M);
+	void prueba();
 	~Laundry();
 };
 

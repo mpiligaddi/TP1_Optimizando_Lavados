@@ -76,6 +76,7 @@ int main(int argc, char const *argv[]) {
 		reading_result = get_line(file,line);
 	}
 
+	laundry.prueba();
 	laundry.makeGarmentGroups();
 	laundry.showGarmentGroups();
 	laundry.getWashingTotalTime();

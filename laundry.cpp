@@ -36,11 +36,12 @@ Pos: Se setea un par de prendas como incompatibles
 void Laundry::setIncompatiblePair(int firstId, int secondId) {
 	auto firstGarment = garments.find(firstId);
     if (firstGarment == garments.end()) {
-    	printf("Estoy con el id %i\n",firstId );
+    	//printf("Estoy con el id %i\n",firstId );
         Garment garment(firstId);
         garment.setIncompatibleGarment(secondId);
         garments.insert({firstId, garment});
-        idGarments.push_back(firstId); // en la entrega 2 se repite el id garment 
+        //idGarments.push_back(firstId); // en la entrega 2 se repite el id garment 
+       // washingTimeGarments.push_back(garment.getWashingTime());
     }
     else {
     	firstGarment->second.setIncompatibleGarment(secondId);
@@ -56,6 +57,58 @@ void Laundry::setIncompatiblePair(int firstId, int secondId) {
     else {
     	secondGarment->second.setIncompatibleGarment(firstId);
     }*/
+    /*for(int i = 1; i < garment.size(); i++) {
+    	printf("El id %i tiene tiempo de lavado %i\n", garments.at(i).getIdNumber, garments.at(i).getWashingTime);
+    }*/
+}
+
+static bool cmp(std::pair<int, Garment>& a,
+         std::pair<int, Garment>& b)
+{
+    return a.second.getWashingTime() < b.second.getWashingTime();
+}
+  
+// Function to sort the map according
+// to value in a (key-value) pairs
+std::vector<std::pair<int, Garment>> Laundry::sorting(std::map<int, Garment>& M)
+{
+  
+    // Declare vector of pairs
+    std::vector<std::pair<int, Garment> > A;
+  
+    // Copy key-value pair from Map
+    // to vector of pairs
+    for (auto& it : M) {
+        A.push_back(it);
+    }
+  
+    // Sort using comparator function
+    sort(A.begin(), A.end(), cmp);
+
+    //ACA!!!! Aca me hace bien el sort con el vector A, lo puedo devolver y usar ese y listo.
+    return A;
+}
+
+void Laundry::prueba() {
+	//std::sort(washingTimeGarments.begin(), washingTimeGarments.end(), std::greater<int>());
+	std::vector<std::pair<int, Garment>> A = sorting(garments); //quizas si me lo esta sorteando bien pero le estoy pifiando en la i, si pongo
+	//que acceda al numero 1 va a tener si o si ese id 1, ya que es un mapa. 
+	/*for(int i = 0; i < garments.size(); i++) {
+
+    	printf("El id %i tiene tiempo de lavado %i\n", garments.at(washingTimeGarments.at(i)).getIdNumber(), garments.at(washingTimeGarments.at(i)).getWashingTime());
+    }
+*/
+	//no me esta haciendo bien el sorting
+   /* auto i = garments.begin();
+    while(i != garments.end()) {
+    	//lleno el vector de idGarments si sale bien esto
+	printf("El id %i tiene tiempo de lavado %i\n", i->first, i->second.getWashingTime());
+    i++;
+    }*/
+    for(int i = A.size() - 1; i >= 0; i--) {
+    	printf("El id %i tiene tiempo de lavado %i\n", A.at(i).first, A.at(i).second.getWashingTime());
+    	idGarments.push_back(A.at(i).first);
+    }
 }
 
 /*
@@ -91,13 +144,15 @@ Pos: Se generan grupos de lavado para cada prenda, separando las incompatibles.
 */
 
 void Laundry::makeGarmentGroups() {
-	sort(idGarments.begin(), idGarments.end());
+	//sort(idGarments.begin(), idGarments.end()); //los id garments se tienen que ordenar de modo que 
+	// el de mayor tiempo de lavado quede primero y el de menor tiempo de lavado quede ultimo. 
 	int washingShift = 0;
 	bool incompatible = false;
 	bool garmentAdded = false;
 	for(int i = 0; i < idGarments.size(); i++) {
 		garmentAdded = false;
 		Garment garment = garments.at(idGarments.at(i));
+		printf("ESTOY CON EL ID %i\n",idGarments.at(i));
 		if(groupOfGarments.empty()) {
 			std::vector<Garment> garments;
 			garments.push_back(garment);
@@ -141,6 +196,7 @@ Pos: Se muestra por pantalla el id de la prenda junto con su grupo asignado.
 */
 
 void Laundry::showGarmentGroups() {
+	sort(idGarments.begin(), idGarments.end()); 
 	std::ofstream outfile ("segunda_solucion.txt");
 	int washingTotalTime = 0;
 	//sort(idGarments.begin(), idGarments.end());
@@ -162,21 +218,45 @@ void Laundry::showGarmentGroups() {
 	outfile.close();
 }
 
+//no se esta calculando bien el mayor tiempo de lavado. No me infliye en el tp pero para saber de antemano cuanto va a tardar
+
 void Laundry::getWashingTotalTime() {
 	int washingTotalTime = 0;
 	Garment garmentDefinitory;
 	for(int i = 0; i < groupOfGarments.size(); i++) {
+		printf("hola\n");
 		auto group = groupOfGarments.find(i);
-		for(int j = 0; j < group->second.size() - 1; j++) {
-			Garment garment = group->second.at(j);
-			Garment garmentAux = group->second.at(j + 1);
-			if(garment.getWashingTime() >= garmentAux.getWashingTime()) {
+		for(int j = 0; j < group->second.size(); j++) {
+			Garment garment;
+			Garment garmentAux;
+			if(j == 0) {
+				garment = group->second.at(j);
+				if(group->second.size() > 1) garmentAux = group->second.at(j + 1);
+			}
+			else {
+				garment = group->second.at(j);
+				printf("eligo el garment %i\n",garment.getIdNumber() );
+				garmentAux = garmentDefinitory;
+				printf("eligo el garment aux %i\n", garmentAux.getIdNumber());
+			}
+			if((group->second.size() == 1) || (garment.getWashingTime() >= garmentAux.getWashingTime())) {
 				garmentDefinitory = garment;
 			}
 			else {
 				garmentDefinitory = garmentAux;
 			}
 		}
+		for(int j = 0; j < groupOfGarments.at(i).size(); j++) {
+			printf("- %i: %i-", groupOfGarments.at(i).at(j).getIdNumber(), groupOfGarments.at(i).at(j).getWashingTime());
+			printf("\n");
+			printf("prendas incompatibles: \n");
+			for(int k = 0; k < groupOfGarments.at(i).at(j).getIncompatibleGarments().size(); k++) {
+				printf("- %i -", groupOfGarments.at(i).at(j).getIncompatibleGarments().at(k));
+			}
+			printf("\n");
+		}
+		printf("\n");
+		printf("garment definirtorio %i \n",garmentDefinitory.getIdNumber() );
 		printf("Washing time del grupo %i es %i\n",i,garmentDefinitory.getWashingTime() );
 		washingTotalTime = washingTotalTime + garmentDefinitory.getWashingTime();
 	}
