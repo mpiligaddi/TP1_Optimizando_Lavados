@@ -1,0 +1,24 @@
+TP1 - Optimizando Lavados
+
+Modelos y Optimización I - FIUBA - 2do Cuatrimestre 2022. 
+
+Padrón: 105682.
+
+Apellido y Nombre: Gaddi, María Pilar.
+
+----------------------------------------------------------
+
+- Introducción
+
+El presente trabajo reune la documentación de la solución tres del primer trabajo práctico de la materia Modelos y Optimización I que consiste en desarrollar la solución más óptima de lavado en una lavandería que tiene N cantidad de prendas junto con M incompatibilidades entre las mismas. En esta parte del trabajo se requiere modelizar el problema mediante Programación Lineal Entera, sin implementar el modelo en un solver, solo presentarlo y explicar las restricciones.
+
+- Explicación
+
+Tanto la primera como la segunda entrega consistió en obtener la solución más optima a través de conocimientos e investigación propia. En ambas se tuvo que codear esta solución. 
+
+Ahora, en esta tercer entrega, se aplicaron no solo las ideas de las entregas anteriores sino que se utilizaron los conceptos aprendidos hasta ahora sobre Programación Lineal Entera, por lo que se tuvo que tener en cuenta que esta solución no se va a resolver como un algortimo sino que todas las restricciones se deben reproducir en conjunto. 
+
+Para poder resolver el problema, se partió de la base principal: entenderlo y entender que es lo que piden. Por eso mismo se armó un esquema para poder visualizar a grandes rasgos el problema y plantear el objetivos, las hipótesis y los supuestos. 
+Una vez que se realizó la primera parte, se propusieron las variables de decisión y, en base a las mismas, se planteó la función objetivo y las restricciones. 
+
+Como aclaración, se tuvo en cuenta que el problema del txt era el mismo que el de la primera entrega. Por eso mismo como solución se subió también la de la primera entrega.
